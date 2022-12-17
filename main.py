@@ -10,6 +10,7 @@ nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
 
 start_date = os.getenv('START_DATE')
+start_date2 = os.getenv('START_DATE2')
 city = os.getenv('CITY')
 birthday = os.getenv('BIRTHDAY')
 
@@ -56,6 +57,14 @@ def get_memorial_days_count():
     return 0
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
   return delta.days
+
+# 纪念日2正数
+def get_memorial_days_count2():
+  if start_date2 is None:
+    print('没有设置 START_DATE2')
+    return 0
+  delta2 = today - datetime.strptime(start_date2, "%Y-%m-%d")
+  return delta2.days
 
 # 生日倒计时
 def get_birthday_left():
@@ -139,6 +148,10 @@ data = {
   },
   "love_days": {
     "value": get_memorial_days_count(),
+    "color": get_random_color()
+  },
+    "love_days2": {
+    "value": get_memorial_days_count2(),
     "color": get_random_color()
   },
   "birthday_left": {
